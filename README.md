@@ -12,9 +12,9 @@ The input data for this pipeline should be high-quality shotgun reads (fastq for
 
 The shotgun sequencing usually contain host contamination reads, the proportion of host reads vary from sample to sample (e.g., human vs. mouse, diets also impact)
 
-- First, reads are aligned against the mouse genome (mm10/GRCm38) or human genome (GRCh38, Rel109) using Bowtie2 ('--local').
+- First, reads are aligned against the mouse genome (mm10/GRCm38) or human genome (GRCh38) using Bowtie2 (`--local`).
 
-- Then, reads that were not aligned to the host genome were identified using samtools ('samtools view -b -f 4 -f 8'). 
+- Then, reads that were not aligned to the host genome were identified using samtools (`samtools view -b -f 4 -f 8`). 
 
 One example for this step running on [CHTC](https://chtc.cs.wisc.edu/) is showed in `chtc/WGS_removeHostRead.sh`.
 
@@ -23,7 +23,7 @@ One example for this step running on [CHTC](https://chtc.cs.wisc.edu/) is showed
 
 Assemble short sequencing reads into longer fragment is the central step to generate MAGs. There are many different assemblers that people use. Here is the example using [SPAdes](https://github.com/ablab/spades). 
 
-- First, the clean microbial reads from each sample are assembled into contigs using SPAdes ('metaspades.py -k 21,33,55,77').
+- First, the clean microbial reads from each sample are assembled into contigs using SPAdes (`metaspades.py -k 21,33,55,77`).
 
 - Then, any contigs short than 500bp are discorded. You can customize this cutoff. 
 
@@ -42,9 +42,9 @@ The assembled contigs are usually genome fragments, contigs binning can generate
 
 The output of MetaBat2 are all the bins identified. Because the assembly are performed in single samples, redundant MAGs may exist among different samples.
 
-- To assess MAGs quality, [CheckM](https://github.com/Ecogenomics/CheckM) ('checkm lineage_wf') is used to estimate genome completeness and contamination for each MAG. The high-quality MAGs are usually defined as "completeness > 90% and contamination < 5%"
+- To assess MAGs quality, [CheckM](https://github.com/Ecogenomics/CheckM) (`checkm lineage_wf`) is used to estimate genome completeness and contamination for each MAG. The high-quality MAGs are usually defined as "completeness > 90% and contamination < 5%"
 
-- The high-quality MAGs were dereplicated using [dRep](https://github.com/MrOlm/drep) ('-pa 0.9 -sa 0.99'). 
+- The high-quality MAGs were dereplicated using [dRep](https://github.com/MrOlm/drep) (`-pa 0.9 -sa 0.99`). 
 
 - In each secondary clusters of dRep output, the representative MAGs are chosen by the highest score. The MAG score is defined as (with default parameters from dRep):
 
@@ -74,11 +74,11 @@ One example for this step running on [CHTC](https://chtc.cs.wisc.edu/) is showed
 
 To get quantitative microbial phenotypes, MAG and MAG gene abundances can be estimated by mapping shotgun DNA/RNA reads to MAG/MAG genes. Here is example using pseudo-alignment tool [kallisto](https://github.com/pachterlab/kallisto).
 
-- To estimate MAG abundance, a single kallisto index using all MAG sequences can be generated ('kallisto index').
+- To estimate MAG abundance, a single kallisto index using all MAG sequences can be generated (`kallisto index`).
 
-- To estimate MAG gene abundance, a single kallisto index using all gene sequences can be generated ('kallisto index').
+- To estimate MAG gene abundance, a single kallisto index using all gene sequences can be generated (`kallisto index`).
 
-- MAG or MAG gene abundance then can be estimated using 'kallisto quant'.
+- MAG or MAG gene abundance then can be estimated using `kallisto quant`.
 
 One example for this step running on [CHTC](https://chtc.cs.wisc.edu/) is showed in `chtc/MAG_kallisto.sh`.
 
