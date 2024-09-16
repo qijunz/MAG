@@ -1,0 +1,43 @@
+universe = vanilla
+
+executable = WGS_mapping_contigs.sh
+arguments = $(sample)
+
+#REQUIREMENTS:
+
+Requirements = (OpSys == "LINUX") && (OpSysMajorVer == 9) && (Target.HasCHTCStaging == true)
+
+transfer_input_files = PROG_instl/bowtie2-2.3.4-linux-x86_64.zip, \
+                       PROG_instl/OS9/samtools-1.19.tar.gz, \
+                       PROG_instl/bedtools2-2.28.0.tar.gz, \
+                       PROG_instl/python-3.8.tar.gz, \
+                       PROG_instl/python-3.8-packages.tar.gz
+
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+
+
+
+log = mapping_contigs/$(sample).log
+error = mapping_contigs/$(sample).error
+output = mapping_contigs/$(sample).out
+
+request_memory = 64GB
+request_disk = 64GB
+request_cpus = 4
+
+queue sample from(
+    AJ_7_DNA
+    AJ_8_DNA
+    AJ_9_DNA
+    AJ_11_DNA
+    AJ_12_DNA
+    AJ_13_DNA
+    AJ_14_DNA
+    AJ_18_DNA
+    AJ_19_DNA
+    AJ_22_DNA
+    AJ_23_DNA
+    AJ_25_DNA
+)

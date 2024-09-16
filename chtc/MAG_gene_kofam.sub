@@ -1,0 +1,27 @@
+universe = vanilla
+
+executable = MAG_gene_kofam.sh
+
+
+#REQUIREMENTS:
+
+Requirements = (OpSys == "LINUX") && (OpSysMajorVer == 9) && (Target.HasCHTCStaging == true)
+
+transfer_input_files = PROG_instl/hmmer-3.4.tar.gz, \
+                       PROG_instl/kofam_scan-1.3.0.tar.gz
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+
+
+
+log = MAG_gene_kofam.log
+error = MAG_gene_kofam.error
+output = MAG_gene_kofam.out
+
+
+request_memory = 100GB
+request_disk = 100GB
+request_cpus = 4
+
+queue 
